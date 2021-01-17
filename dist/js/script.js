@@ -1,60 +1,72 @@
-const hamburger = document.querySelector('.hamburger'),
-	menu = document.querySelector('.menu'),
-	closeElem = document.querySelector('.menu__close');
+$(document).ready(function () {
 
-hamburger.addEventListener('click', () => {
-	menu.classList.add('show');
-});
+	$('[data-modal=consultation]').on('click', function () {
+		$('.modal, #consultation').fadeIn('slow');
+	});
+	$('.modal__close').on('click', function () {
+		$('.modal, #consultation').fadeOut('slow');
+	});
 
-closeElem.addEventListener('click', () => {
-	menu.classList.remove('show');
-});
-
-const counters = document.querySelectorAll('.skills__ratings-counter'),
-	lines = document.querySelectorAll('.skills__ratings-line span');
-
-counters.forEach((item, i) => {
-	lines[i].style.width = item.innerHTML;
-
-    const modalTrigger = document.querySelector/* All */('.contacts__btn'),
-        modal = document.querySelector('.modal'),
-        modalCloseBtn = document.querySelector('.modal__close');
-
-
-
-    // Открываем модальное окно при клике на любую из кнопок с классом '.contacts__btn'. Вместо add  можно использовать toggle. И запрещаем прокрутку.
-function openModal() {
-	modal.classList.add('show');
-	modal.classList.remove('hide');
-	document.body.style.overflow = 'hidden';
-	// clearInterval(modalTimerId);
-}
-
-modalTrigger/* .forEach(btn => {
-	btn */.addEventListener('click', openModal);
-/* }); */
-
-// Закрываем модальное окно при клике на крестик или подложку. И возвращаем прокрутку.
-function closeModal() {
-	modal.classList.add('hide');
-	modal.classList.remove('show');
-	document.body.style.overflow = '';
-}
-
-modalCloseBtn.addEventListener('click', closeModal);
-
-modal.addEventListener('click', (e) => {
-	if (e.target === modal) {
-		closeModal();
+	function validateForms(form) {
+		$(form).validate({
+			rules: {
+				name: {
+					required: true,
+					minlength: 2
+				},
+				email: {
+					required: true,
+					email: true
+				},
+				text: {
+					required: true,
+					minlength: 5
+				},
+				check: {
+					required: true
+				}
+			},
+			messages: {
+				name: {
+					required: "Пожалуйста, введите свое имя",
+					minlength: jQuery.validator.format("Введите не менее {0} символов!")
+				},
+				email: {
+					required: "Пожалуйста, введите свою почту",
+					email: "Неправильно введен адрес почты"
+				},
+				text: {
+					required: "Пожалуйста, введите сообщение",
+					minlength: jQuery.validator.format("Введите не менее {0} символов!")
+				},
+				check: {
+					required: "Пожалуйста, поставьте галочку"
+				}
+			}
+		});
 	}
-});
+
+	validateForms('#consultation-form');
 
 
-// Закрываем модальное окно клавишей Escape
-document.addEventListener('keydown', (e) => {
-	if (e.code === "Escape" && modal.classList.contains('show')) {
-		closeModal();
-	}
-});
+	$('form').submit(function (e) {
+		e.preventDefault();
 
+		if (!$(this).valid()) {
+			return;
+		}
+
+		$.ajax({
+			type: "POST",
+			url: "mailer/smart.php",
+			data: $(this).serialize()
+		}).done(function () {
+			$(this).find("input").val("");
+			$('#consultation').fadeOut();
+			$('.modal, #consultation-form').fadeIn('slow');
+
+			$('form').trigger('reset');
+		});
+		return false;
+	});
 });
