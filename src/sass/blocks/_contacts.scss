@@ -1,5 +1,6 @@
 .contacts {
     padding: 120px 0 90px 0;
+
     &__wrapper {
         padding: 0 35px 0 52px;
         display: grid;
@@ -43,6 +44,9 @@
         grid-template: 45px 190px 45px / repeat(2, 280px);
         justify-content: space-between;
         row-gap: 27px;
+        .error{
+            border: 1px solid red;
+            }
         label {
             display: block;
             position: absolute;
@@ -53,6 +57,16 @@
             background-color: #fff;
             font-size: 12px;
             margin-bottom: 0;
+            &.error{
+                border: none;
+                text-align: center;
+                margin-top: -15px;
+                color: $main-color;
+            }
+            
+        }
+        #check-error{
+           position: static;
         }
     }
     &__triggers {

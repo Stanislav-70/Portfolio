@@ -167,7 +167,7 @@
                         <source type="image/webp" srcset="img/main_photo.webp">
                         <img src="img/main_photo.jpg" alt="photo">
                     </picture>
-                    
+
                 </div>
 
                 <div class="about__descr">
@@ -220,6 +220,8 @@
     </section>
 
     <section class="resume">
+
+
         <div class="container">
             <h2 class="title title_fz16 title__section-title">Опыт</h2>
             <div class="title title_fz36 title__section-subtitle">Чем я буду полезна</div>
@@ -425,7 +427,7 @@
         <div class="container">
             <h2 class="title title_fz16 title__section-title">Прайс-лист</h2>
             <div class="divider"></div>
-    
+
             <div class="price__wrapper">
                 <div class="price__item">
                     <div class="price__type">Landing-page</div>
@@ -501,25 +503,25 @@
                     <div class="title title_fz14 contacts__text">
                         Или оставьте ваши данные и я сама вам напишу:
                     </div>
-
                     <form id="consultation-form" action="#" class="contacts__form">
                         <div class="contacts__input">
-                            <input name="name" required id="name" type="text">
+                            <input name="name" id="name" type="text">
                             <label for="name">Ваше имя</label>
                         </div>
                         <div class="contacts__input">
-                            <input name="email" required id="email" type="email">
+                            <input name="email" id="email" type="email">
                             <label for="email">Ваша почта</label>
                         </div>
 
                         <div class="contacts__textarea">
-                            <textarea name="text" required id="text"></textarea>
+                            <textarea name="text" id="text"></textarea>
                             <label for="text">Ваше сообщение</label>
                         </div>
                         <div class="contacts__triggers">
-                            <button data-modal="consultation" class="contacts__btn btn">Отправить сообщение</button>
+                            <button class="contacts__btn btn" id="button_submit" data-modal="consultation">Отправить сообщение</button>
+                            <!-- <button class="contacts__btn btn" data-modal></button> -->
                             <div class="contacts__policy">
-                                <input required type="checkbox">
+                                <input name="check" id="check" type="checkbox">
                                 <span>Я согласен(а) с <a href="/policy.html">политикой конфиденциальности</a></span>
                             </div>
                         </div>
@@ -529,18 +531,26 @@
         </div>
     </section>
 
-    
-        <!-- <section class="modal">
-            <div class="modal_mini">
-                <div class="modal__close">&times;</div>
-                <div class="modal__subtitle">Спасибо за ваше сообщение!</div>
-                <div class="modal__descr">Я свяжусь с вами в ближайшее время!</div>
-            </div>
-        </section>  -->
+    <div class="modal">
+        <!-- <div class="modal__dialog"> -->
+        <div class="modal__content" id="consultation">
+            <form action="#">
+                <div class="modal__close" data-close>&times;</div>
+                <div class="modal__title">Спасибо за ваше сообщение. <br>
+                    Я свяжусь с вами как можно быстрее!</div>
+                <!-- <input required placeholder="Ваше имя" name="name" type="text" class="modal__input">
+                <input required placeholder="Ваш номер телефона" name="phone" type="phone" class="modal__input"> -->
+                <!-- <button class="btn btn_dark btn_min"> Перезвонить мне</button> -->
+            </form>
+        </div>
+        <!-- </div> -->
+    </div>
 
     <script src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="js/jquery.validate.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="js/post.js"></script>
+    <!-- <script src="js/forms.js"></script> -->
+    <!-- <script src="js/script.js"></script> -->
 </body>
 
 </html>
